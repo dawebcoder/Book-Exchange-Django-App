@@ -1,6 +1,5 @@
-# Book Exchange Django App
- Full Stack Django Book Exchange App
--------------------------------------
+Full Stack Django Book Exchange App
+------------------------------------
 
 Features:
 ---------
@@ -20,8 +19,8 @@ Technologies Used:
 
 HTML,
 CSS,
-Javscript
-Bootstrap
-Django
-Python
+Javscript,
+Bootstrap,
+Django,
+Python,
 SQL
