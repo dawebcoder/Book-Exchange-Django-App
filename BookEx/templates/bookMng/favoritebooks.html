@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+Favorite Books
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+{% for item in item_list %}
+<li class="nav-item">
+  <a class="nav-link" href="{{ item.link }}"> {{ item.item }} </a>
+</li>
+{% endfor %}
+{% endblock sidenav %}
+
+<!-- Creates Book Display -->
+{% block content %}
+<h1 align="center"> Favorite Books </h1>
+
+<div class="d-flex justify-content-center">
+  <table class="table table-sm table-hover table-bordered" style="width: 525px">
+    <thead>
+      <th class="text-center">
+        Books of Your Choosing
+      </th>
+    </thead>
+    {% for book in books %}
+    <tr class="align-middle" align="center">
+      <td>
+        <img src="{% static book.pic_path %}" height="150"/><br><br>
+        <a class="text-dark" href="book_detail/{{ book.id }}"> {{ book.name }} </a>
+      </td>
+      <td>
+        <a class="btn btn-danger btn-sm" href="{% url 'favorite_add' book.id %}">
+          <i class="fa-solid fa-heart-circle-minus"></i> Remove
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock content %}

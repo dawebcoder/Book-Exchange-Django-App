@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+Book Display
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+{% for item in item_list %}
+<li class="nav-item">
+    <a class="nav-link" href="{{ item.link }}"> {{ item.item }} </a>
+</li>
+{% endfor %}
+{% endblock sidenav %}
+
+<!-- Creates Book Display -->
+{% block content %}
+<h1 align="center"> Book Display </h1>
+
+<!--
+<div class="d-flex justify-content-center">
+    <table class="table table-sm table-hover table-bordered" style="width: 500px">
+        <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+            </th>
+        </tr>
+        </thead>
+        {% for book in books %}
+        <tr>
+            <td>
+                <a href="book_detail/{{ book.id }}" class="text-dark"> {{ book.name }} </a>
+            </td>
+            <td>
+                ${{ book.price }}
+            </td>
+            {% if fav %}
+            <td align="center">
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'favorite_books' book.id %}">
+                    <i class="fa fa-heart-o" aria-hidden="true">Remove from favorites</i>
+                </a>
+            </td>
+            {% else %}
+            <td align="center">
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'favorite_add' book.id %}">
+                    <i class="fa fa-heart-o" aria-hidden="true">Add to favorites</i>
+                </a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+-->
+
+
+<div class="row">
+    {% for book in books %}
+    <div class="col">
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{% static book.pic_path %}" style="height: 425px" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ book.name }}</h5>
+            <p class="card-text">by {{book.username }}</p>
+            <a href="book_detail/{{ book.id }}" class="btn btn-primary">Details</a>
+        </div>
+        <div class="card-footer">
+            {% if fav %}
+                <a class="btn btn-danger btn-sm" href="{% url 'favorite_add' book.id %}">
+                    <i class="fa fa-window-close"> Remove from favorites</i>
+                </a>
+            {% else %}
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'favorite_add' book.id %}">
+                    <i class="fa fa-heart-o"></i> Add to favorites
+                </a>
+            {% endif %}
+        </div>
+    </div>
+        </div>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock content %}

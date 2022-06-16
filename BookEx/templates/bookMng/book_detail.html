@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+    Book Detail
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+    {% for item in item_list %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ item.link }}"> {{ item.item }} </a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+<!-- Creates Book Display under "Display Books" Page -->
+{% block content %}
+<div class="container-fluid">
+    <div class="row m-4">
+        <div class="col-5 align-middle">
+            <div align="center">
+                <img src="{% static book.pic_path %}" height="400" />
+            </div>
+        </div>
+        <div class="col-7 mt-4">
+                <h3>{{ book.name }}</h3>
+            <div class="card" style="padding: 10px 10px">
+                by {{ book.username }}
+                <hr class="Seperator">
+                {{ book.web }}
+                <hr class="Seperator">
+                {{ book.publishdate }}
+                <hr class="Seperator">
+                ${{ book.price }}
+                <hr class="Seperator">
+                <h4> Shopping Cart </h4>
+
+                {% if book.shopping_cart %}
+                <form action="\book_add/{{ book.id }}">
+                    <button class="btn btn-outline-primary btn-rounded" type="Submit">
+                        <i class="fa fa-shopping-cart"></i> Remove</button>
+                </form>
+                {% else %}
+                <form action="\book_add/{{ book.id }}">
+                    <button class="btn btn-outline-primary btn-rounded" type="Submit">
+                        <i class="fa fa-shopping-cart"></i> Add</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="card mb-4 mt-3">
+        <div class="card-body">
+            <!-- comments -->
+            <h2>{{ comments.count }} comments</h2>
+
+            {% for comment in comments %}
+            <div class="comments" style="padding: 10px;">
+                <p class="font-weight-bold">
+                    {{ comment.name }}
+                    <span class=" text-muted font-weight-normal">
+              {{ comment.created_on }}
+            </span>
+                </p>
+                {{ comment.body | linebreaks }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="card mb-4 mt-3 align-center">
+        <div class="card-body">
+            {% if new_comment %}
+            <div class="alert alert-success" role="alert">
+                Your comment is awaiting moderation
+            </div>
+            {% else %}
+            <h3>Leave a comment</h3>
+            <form method="post" style="margin-top: 1.3em;">
+                {{ comment_form.as_p }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

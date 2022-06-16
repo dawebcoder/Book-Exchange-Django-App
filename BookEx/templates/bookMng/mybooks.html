@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+    My Books
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+  {% for item in item_list %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ item.link }}"> {{ item.item }} </a>
+    </li>
+  {% endfor %}
+{% endblock sidenav %}
+
+<!-- Displays Books uploaded by User-->
+{% block content %}
+  <h1 align="center"> My Books </h1>
+
+  <div class="d-flex justify-content-center">
+  <table class="table table-sm table-hover table-bordered" style="width: 500px">
+    <thead>
+      <tr>
+        <th class="col-md-6">
+          Title
+        </th>
+        <th class="col-md-3">
+          Price
+        </th>
+      </tr>
+    </thead>
+    {% for book in books %}
+      <tr>
+        <td>
+          <a href="book_detail/{{ book.id }}" class="text-dark"> {{ book.name }} </a>
+        </td>
+        <td>
+          ${{ book.price }}
+        </td>
+        <td class="text-center">
+          <a class="btn btn-danger btn-sm" href="book_delete/{{ book.id }}">
+            <i class="fa fa-window-close"></i> Remove
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  </div>
+{% endblock content %}

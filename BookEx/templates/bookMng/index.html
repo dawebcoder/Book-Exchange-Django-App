@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+Welcome
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+    {% for item in item_list %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ item.link }}"> {{ item.item }} </a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+<!-- Creates Home Page when BookEx opens -->
+{% block content %}
+<h1 class="myHeadings"> Welcome to BookEx</h1>
+<h5 align="center">The Best App To Manage All Of Your Books!</h5>
+<div class="myCenter"><img src="{% static 'bookex-home.png' %}"></div>
+{% endblock content %}

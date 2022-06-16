@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+Shopping Cart
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+{% for item in item_list %}
+<li class="nav-item">
+    <a class="nav-link" href="{{ item.link }}"> {{ item.item }} </a>
+</li>
+{% endfor %}
+{% endblock sidenav %}
+
+<!-- Creates Book Display under "Display Books" Page -->
+{% block content %}
+<h1 align="center"> Shopping Cart </h1>
+
+<div class="d-flex justify-content-center">
+    <table class="table table-sm table-hover table-bordered" style="width: 525px">
+        <thead>
+        <tr align="center">
+            <th>
+                Book Cover
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
+        </thead>
+        {% for book in ordered_books %}
+        <tr class="align-middle" align="center">
+            <td>
+                <img src="{% static book.pic_path %}" height="150"/>
+            </td>
+            <td>
+                <a href="book_detail/{{ book.id }}" class="text-dark"> {{ book.name }} </a>
+            </td>
+            <td>
+                ${{ book.price }}
+            </td>
+            <td>
+                <form action="\book_add/{{ book.id }}">
+                    <button class="btn btn-block btn-outline-primary" type="Submit">
+                        <i class="fa fa-shopping-cart"></i> Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<h3 align="center">Total Price : ${{ total_sum }}</h3>
+
+{% endblock content %}

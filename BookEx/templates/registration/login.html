@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+    User Login
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+    <li class="nav-item">
+        <a class="nav-link" href="/"> Home </a>
+    </li>
+{% endblock sidenav %}
+
+<!-- Login Form -->
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 border-right">
+            <h1 align="center"> User Login </h1>
+
+            <div class="d-flex justify-content-center">
+                <form action="{% url 'login' %}" method="post">
+                    <table>
+                        {{ form.as_table }}
+                        <tr>
+                            <td></td>
+                            <td style="float: right">
+                                <input type="submit" value="login">
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-6" align="center">
+            <h1> Register </h1>
+            <a href="{% url 'register' %}" class="btn btn-warning" >Sign Up</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+User Registration
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+    <li class="nav-item">
+        <a class="nav-link" href="/"> Home </a>
+    </li>
+{% endblock sidenav %}
+
+<!-- User Registration Form -->
+{% block content %}
+<h1 align="center"> User Registration </h1>
+
+<form action="" method="post">
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td>
+                <input type="submit" value="Submit">
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="next" value="{{ next }}"/>
+    {% csrf_token %}
+</form>
+{% endblock content %}

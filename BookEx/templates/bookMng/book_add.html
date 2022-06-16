@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- Changes Page Name -->
+{% block title %}
+Added to Shopping Cart
+{% endblock title %}
+
+<!-- Adds Paths into menu-->
+{% block sidenav %}
+<li class="nav-item">
+    <a class="nav-link" href="/"> Home </a>
+</li>
+{% endblock sidenav %}
+
+<!-- Display Message-->
+{% block content %}
+<h1 align="center"> The book has been added to your shopping cart!!!</h1>
+<div align="center">
+    <a class="btn btn-warning btn-rounded" href="{% url 'shopping_cart' %}" role="button">Go to Cart</a>
+</div>
+{% endblock content %}
